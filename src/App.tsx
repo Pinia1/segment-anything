@@ -11,14 +11,12 @@ const MODELS = {
     {
       name: "sam-b-encoder-int8",
       url: "/sam_vit_b-encoder-int8.onnx",
-      // url: new URL("./sam_vit_b-encoder-int8.onnx", import.meta.url).href,
       size: 108,
     },
     {
       name: "sam-b-decoder-int8",
       // url: "/sam_vit_b-decoder-int8.onnx",
       url: "/sam_vit_b-decoder-int8.onnx",
-      // url: new URL("./sam_vit_b-decoder-int8.onnx", import.meta.url).href,
       size: 5,
     },
   ],
@@ -60,7 +58,7 @@ function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const init = async () => {
-    await clearModelCache();
+    // await clearModelCache();
     const canvas = canvasRef.current!;
     canvas.style.cursor = "wait";
 
@@ -150,7 +148,11 @@ function App() {
     });
 
     const feed = config.isSlimSam ? { pixel_values: t } : { input_image: t };
+
+    console.log(feed, "feed");
+
     const session = await MODELS[config.model][0].sess;
+    console.log(session, "session");
 
     const start = performance.now();
     image_embeddings = session.run(feed);
@@ -260,7 +262,7 @@ function App() {
   }
 
   async function decoder(points: any, labels: any) {
-    console.log(points, "poing");
+    console.log("decoderdecoderdecoder");
 
     console.log("decodering", points, labels);
     const canvas = canvasRef.current!;
@@ -378,6 +380,7 @@ function App() {
         const model_bytes = await fetchAndCache(model.url, model.name);
         const extra_opt = model.opt || {};
         const sess_opt = { ...opt, ...extra_opt };
+        console.log(sess_opt, "sess_opt");
 
         model.sess = await ort.InferenceSession.create(model_bytes, sess_opt);
       } catch (e) {
