@@ -24,8 +24,8 @@ function App() {
       await onnxRef.current!.matchingImage(
         document.getElementById("original-image") as HTMLImageElement,
         canvasRef.current!,
-        1024,
-        1024
+        512,
+        512
       );
       setLoading(false);
     });
@@ -40,7 +40,7 @@ function App() {
       {loading ? <div>Loading...</div> : <h1>1</h1>}
 
       <div>
-        <img style={{ display: "none" }} id="original-image" src={"/cp.png"} />
+        <img style={{ display: "none" }} id="original-image" src={"/dog.jpg"} />
       </div>
 
       <div>

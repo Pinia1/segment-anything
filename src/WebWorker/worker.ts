@@ -154,7 +154,8 @@ export class ONNXWorker {
   constructor() {}
   async loadModels(models: ONNXModel[], wasmBaseUrl: string) {
     ort.env.wasm.wasmPaths = wasmBaseUrl;
-    ort.env.wasm.numThreads = 4;
+
+    ort.env.wasm.numThreads = navigator.hardwareConcurrency || 4;
     ort.env.wasm.simd = true;
     for (const [name, model] of Object.entries(models as ONNXModel[])) {
       try {

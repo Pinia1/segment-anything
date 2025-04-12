@@ -12,13 +12,6 @@ export interface ONNXModel {
   sess?: any;
 }
 
-export const onnxConfig = {
-  model: "sam_b_int8",
-  provider: "wasm",
-  device: "gpu",
-  threads: 4,
-};
-
 const MODEL_WIDTH = 1024;
 const MODEL_HEIGHT = 1024;
 export default class ONNX {
