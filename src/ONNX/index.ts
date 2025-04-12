@@ -48,11 +48,10 @@ export default class ONNX {
         const model_bytes = await this.fetchAndCache(model.url);
         const extra_opt = model.opt || {};
         const sess_opt = { ...opt, ...extra_opt };
-        console.log(sess_opt, "sess_opt");
 
         model.sess = await ort.InferenceSession.create(model_bytes!, sess_opt);
       } catch (e) {
-        console.log(e, "eeee");
+        console.log(e, "models loading error");
       }
     }
     this.model = models;
